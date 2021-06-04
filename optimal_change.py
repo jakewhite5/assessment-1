@@ -9,6 +9,8 @@ def optimal_change(price, given):
         return 'No change needed.'
     if change_amount < 0:
         return 'Insuffient funds.'
+    if price < 0:
+        return 'Vending machines do not offer refunds at this time.'
     return_string = ''
     #holding/staging area to collect amounts of each denomination of change
     count_dict = {}
@@ -32,6 +34,7 @@ def optimal_change(price, given):
             return_string += ' '+str(count_dict[item])+' pennies '
         # adds 's' to non-penny plural items 
         elif count_dict[item] > 1:
+            #possible dry violation but I wanted to keep minimal ternary statments in f string
             return_string += ' '+str(count_dict[item])+' '+item+'s,'
         else:
             return_string += ' '+str(count_dict[item])+' '+item+','
@@ -40,6 +43,5 @@ def optimal_change(price, given):
     return (f'The optimal change for an item that costs ${price} with an amount paid of ${given} is{return_string[:-1]}.')
 
 
-optimal_change('a', 'b')
 
 
